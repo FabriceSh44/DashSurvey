@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "288320266471",
+    "firebase_url": "https://dashsurvey-v0.firebaseio.com",
+    "project_id": "dashsurvey-v0",
+    "storage_bucket": "dashsurvey-v0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288320266471:android:c188ddd2d8cfb1cd",
+        "android_client_info": {
+          "package_name": "com.fan.dashsurvey.dashsurvey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288320266471-7pn0m9k58v37ekfuuio8fltjlh05uefh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx2pOCJmk2e7fhmDcLUlhUljy4ifK-uZ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
