@@ -11,6 +11,12 @@
 .gradle/
 .idea/
 
+#android studio file
+*.iml
+
+#macbook dsstore
+.DS_Store
+
 #build
 build/
 
