@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "288320266471-47m0ufnrvec5j95r82qvd1i4qd70bc8v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fan.dashsurvey.dashsurvey",
+            "certificate_hash": "1065c7ca5c2c49af5a3e2ffe8994a04439b75045"
+          }
+        },
+        {
           "client_id": "288320266471-7pn0m9k58v37ekfuuio8fltjlh05uefh.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288320266471-7pn0m9k58v37ekfuuio8fltjlh05uefh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
