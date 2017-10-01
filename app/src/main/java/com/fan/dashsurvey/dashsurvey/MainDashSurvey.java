@@ -53,6 +53,7 @@ public class MainDashSurvey extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(keyEditText.getText().toString());
         myRef.setValue(messageEditText.getText().toString());
+        DashSurveyNotification.SendNotification(this,"title","message");
     }
 
     /**
