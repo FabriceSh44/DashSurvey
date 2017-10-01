@@ -1,9 +1,21 @@
 package com.fan.dashsurvey.dashsurvey.messaging;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.fan.dashsurvey.dashsurvey.MainDashSurvey;
+import com.fan.dashsurvey.dashsurvey.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Random;
 
 /**
  * Created by fabriceedon on 9/30/17.
@@ -15,22 +27,49 @@ public class DashSurveyMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // ...
-
-        // TODO(developer): Handle FCM messages here.
-        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-
-        // Check if message contains a data payload.
-        if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+        String title = "";
+        if (remoteMessage.getNotification().getTitle() != null){
+            title = remoteMessage.getNotification().getTitle();
         }
 
-        // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+        String message = "";
+        if (remoteMessage.getNotification().getBody() != null){
+            message = remoteMessage.getNotification().getBody();
         }
 
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
+        Log.e("notification","recieved");
+
+
+        sendNotification(title, message);
+    }
+
+    private void sendNotification(String title, String message) {
+
+        Intent intent = new Intent(this, MainDashSurvey.class);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.dashsurvey_icon)
+                .setLargeIcon(BitmapFactory.decodeResource(this.getResources(),
+                        R.mipmap.dashsurvey_icon))
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(getRequestCode(), notificationBuilder.build());
+    }
+
+    private static int getRequestCode() {
+        Random rnd = new Random();
+        return 100 + rnd.nextInt(900000);
     }
 }
