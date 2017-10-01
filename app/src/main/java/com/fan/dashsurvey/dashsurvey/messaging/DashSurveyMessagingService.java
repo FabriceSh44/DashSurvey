@@ -8,7 +8,7 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
+import android.widget.RemoteViews;
 
 import com.fan.dashsurvey.dashsurvey.MainDashSurvey;
 import com.fan.dashsurvey.dashsurvey.R;
@@ -26,38 +26,29 @@ public class DashSurveyMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        // ...
         String title = "";
         if (remoteMessage.getNotification().getTitle() != null){
             title = remoteMessage.getNotification().getTitle();
         }
-
         String message = "";
         if (remoteMessage.getNotification().getBody() != null){
             message = remoteMessage.getNotification().getBody();
         }
-
-        Log.e("notification","recieved");
-
-
         sendNotification(title, message);
     }
 
     private void sendNotification(String title, String message) {
-
         Intent intent = new Intent(this, MainDashSurvey.class);
-
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        RemoteViews notificationView = new RemoteViews(getPackageName(),
+                R.layout.notification_dash_survey);
+//TODO : get notification channel id
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.dashsurvey_icon)
-                .setLargeIcon(BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.dashsurvey_icon))
-                .setContentTitle(title)
-                .setContentText(message)
+                .setContent(notificationView)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
