@@ -5,12 +5,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.fan.dashsurvey.dashsurvey.notification.DashSurveyNotification;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,7 +53,7 @@ public class MainDashSurvey extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(keyEditText.getText().toString());
         myRef.setValue(messageEditText.getText().toString());
-        DashSurveyNotification.SendNotification(this,"title","message");
+        DashSurveyNotification.SendNotification(this, messageEditText.getText().toString());
     }
 
     /**

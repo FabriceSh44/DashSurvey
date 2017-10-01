@@ -31,6 +31,8 @@
             </intent-filter>
         </service>
     </application>
+    <receiver android:name="DashSurvey$noButtonListener" />
+    <receiver android:name="DashSurvey$yesButtonListener" />
 
 
 </manifest>

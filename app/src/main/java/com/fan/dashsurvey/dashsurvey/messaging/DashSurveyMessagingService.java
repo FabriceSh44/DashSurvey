@@ -1,21 +1,8 @@
 package com.fan.dashsurvey.dashsurvey.messaging;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.support.v4.app.NotificationCompat;
-import android.widget.RemoteViews;
-
-import com.fan.dashsurvey.dashsurvey.DashSurveyNotification;
-import com.fan.dashsurvey.dashsurvey.MainDashSurvey;
-import com.fan.dashsurvey.dashsurvey.R;
+import com.fan.dashsurvey.dashsurvey.notification.DashSurveyNotification;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import java.util.Random;
 
 /**
  * Created by fabriceedon on 9/30/17.
@@ -34,12 +21,7 @@ public class DashSurveyMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification().getBody() != null){
             message = remoteMessage.getNotification().getBody();
         }
-        DashSurveyNotification.SendNotification(this,title, message);
+        DashSurveyNotification.SendNotification(this,message);
     }
-
-    private void sendNotification(String title, String message) {
-
-    }
-
 
 }
