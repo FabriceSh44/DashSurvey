@@ -27,6 +27,7 @@ public class MainDashSurvey extends AppCompatActivity {
     private EditText messageEditText;
     private static int ID = 0;
     private EditText keyEditText;
+    private FirebaseAuth.AuthStateListener authListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +102,7 @@ public class MainDashSurvey extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             FirebaseAuth auth = FirebaseAuth.getInstance();
-            auth.signOut();
-            // this listener will be called when there is change in firebase user session
-            FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+            auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
                 @Override
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                     FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -112,9 +111,21 @@ public class MainDashSurvey extends AppCompatActivity {
                         // launch login activity
                         startActivity(new Intent(MainDashSurvey.this, LoginActivity.class));
                         finish();
-                    }
-                }
-            };
+                    }}});
+            auth.signOut();
+//            // this listener will be called when there is change in firebase user session
+//            authListener = new FirebaseAuth.AuthStateListener() {
+//                @Override
+//                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                    FirebaseUser user = firebaseAuth.getCurrentUser();
+//                    if (user == null) {
+//                        // user auth state is changed - user is null
+//                        // launch login activity
+//                        startActivity(new Intent(MainDashSurvey.this, LoginActivity.class));
+//                        finish();
+//                    }
+//                }
+//            };
             return true;
         }
 
